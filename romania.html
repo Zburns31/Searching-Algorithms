@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 900px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "Arad", "label": "Arad", "pos": [91, 492], "shape": "dot", "size": 10}, {"id": "Zerind", "label": "Zerind", "pos": [108, 531], "shape": "dot", "size": 10}, {"id": "Sibiu", "label": "Sibiu", "pos": [207, 457], "shape": "dot", "size": 10}, {"id": "Timisoara", "label": "Timisoara", "pos": [94, 410], "shape": "dot", "size": 10}, {"id": "Bucharest", "label": "Bucharest", "pos": [400, 327], "shape": "dot", "size": 10}, {"id": "Urziceni", "label": "Urziceni", "pos": [456, 350], "shape": "dot", "size": 10}, {"id": "Pitesti", "label": "Pitesti", "pos": [320, 368], "shape": "dot", "size": 10}, {"id": "Giurgiu", "label": "Giurgiu", "pos": [375, 270], "shape": "dot", "size": 10}, {"id": "Fagaras", "label": "Fagaras", "pos": [305, 449], "shape": "dot", "size": 10}, {"id": "Craiova", "label": "Craiova", "pos": [253, 288], "shape": "dot", "size": 10}, {"id": "Drobeta", "label": "Drobeta", "pos": [165, 299], "shape": "dot", "size": 10}, {"id": "Rimnicu", "label": "Rimnicu", "pos": [233, 410], "shape": "dot", "size": 10}, {"id": "Mehadia", "label": "Mehadia", "pos": [168, 339], "shape": "dot", "size": 10}, {"id": "Eforie", "label": "Eforie", "pos": [562, 293], "shape": "dot", "size": 10}, {"id": "Hirsova", "label": "Hirsova", "pos": [534, 350], "shape": "dot", "size": 10}, {"id": "Iasi", "label": "Iasi", "pos": [473, 506], "shape": "dot", "size": 10}, {"id": "Vaslui", "label": "Vaslui", "pos": [509, 444], "shape": "dot", "size": 10}, {"id": "Neamt", "label": "Neamt", "pos": [406, 537], "shape": "dot", "size": 10}, {"id": "Lugoj", "label": "Lugoj", "pos": [165, 379], "shape": "dot", "size": 10}, {"id": "Oradea", "label": "Oradea", "pos": [131, 571], "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "Arad", "to": "Zerind", "weight": 1}, {"from": "Arad", "to": "Sibiu", "weight": 1}, {"from": "Arad", "to": "Timisoara", "weight": 1}, {"from": "Bucharest", "to": "Urziceni", "weight": 1}, {"from": "Bucharest", "to": "Pitesti", "weight": 1}, {"from": "Bucharest", "to": "Giurgiu", "weight": 1}, {"from": "Bucharest", "to": "Fagaras", "weight": 1}, {"from": "Craiova", "to": "Drobeta", "weight": 1}, {"from": "Craiova", "to": "Rimnicu", "weight": 1}, {"from": "Craiova", "to": "Pitesti", "weight": 1}, {"from": "Drobeta", "to": "Mehadia", "weight": 1}, {"from": "Eforie", "to": "Hirsova", "weight": 1}, {"from": "Fagaras", "to": "Sibiu", "weight": 1}, {"from": "Hirsova", "to": "Urziceni", "weight": 1}, {"from": "Iasi", "to": "Vaslui", "weight": 1}, {"from": "Iasi", "to": "Neamt", "weight": 1}, {"from": "Lugoj", "to": "Timisoara", "weight": 1}, {"from": "Lugoj", "to": "Mehadia", "weight": 1}, {"from": "Oradea", "to": "Zerind", "weight": 1}, {"from": "Oradea", "to": "Sibiu", "weight": 1}, {"from": "Pitesti", "to": "Rimnicu", "weight": 1}, {"from": "Rimnicu", "to": "Sibiu", "weight": 1}, {"from": "Urziceni", "to": "Vaslui", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
